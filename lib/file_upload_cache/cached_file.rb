@@ -15,13 +15,13 @@ module FileUploadCache
                              :id => id, 
                              :content_type => image.content_type)
 
-      FileUploadCache.cache.write("FileUploadCache::#{id}", cached_file) 
+      FileUploadCache.file_cache.write("FileUploadCache::#{id}", cached_file) 
 
       cached_file
     end
 
     def self.find(id)
-      FileUploadCache.cache.read("FileUploadCache::#{id}")
+      FileUploadCache.file_cache.read("FileUploadCache::#{id}")
     end
 
   end
