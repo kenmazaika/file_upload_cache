@@ -1,8 +1,6 @@
-require 'uuid'
 require 'active_support/core_ext/module/attribute_accessors.rb'
-
-require 'file_upload_cache/cached_file'
-
+require 'app/models/cached_file.rb'
+require 'uuid'
 
 module FileUploadCache
   mattr_accessor :cache
@@ -18,3 +16,4 @@ module FileUploadCache
   end
 
 end
+

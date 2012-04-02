@@ -1,10 +1,5 @@
 source "http://rubygems.org"
 
 gem 'uuid'
-gem 'activesupport'
+gem "rails", "3.0.12"
 
-group :development do
-  gem "minitest"
-  gem "bundler"
-  gem 'jeweler'
-end
