@@ -1,5 +1,6 @@
 require 'active_support/core_ext/module/attribute_accessors.rb'
 require 'app/models/cached_file.rb'
+require 'app/inputs/uploader_input.rb'
 require 'uuid'
 
 module FileUploadCache

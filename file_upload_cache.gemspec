@@ -4,6 +4,8 @@ Gem::Specification.new do |s|
   s.name = "file_upload_cache"
   s.summary = "Insert FileUploadCache summary."
   s.description = "Insert FileUploadCache description."
-  s.files = Dir["{app,lib,config}/**/*"] + ["MIT-LICENSE", "Rakefile", "Gemfile", "README.rdoc"]
-  s.version = "0.0.1"
+  s.files = Dir["{app,lib,config}/**/*"] + ["Rakefile", "Gemfile"]
+  s.version = "0.0.3"
+  s.authors = ['Ken Mazaika']
+  s.add_dependency 'uuid'
 end
