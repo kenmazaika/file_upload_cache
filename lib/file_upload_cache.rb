@@ -1,7 +1,5 @@
-
 require 'file_upload_cache/engine.rb'
 require 'active_support/core_ext/module/attribute_accessors.rb'
-require 'file_upload_cache/cached_attributes.rb'
 require 'uuid'
 
 module FileUploadCache

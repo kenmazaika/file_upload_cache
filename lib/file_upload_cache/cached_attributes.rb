@@ -17,10 +17,7 @@ module FileUploadCache
           original = self.instance_variable_get("@#{field}_original")
           self.send("cached_#{field}=", CachedFile.store(original)) unless original.blank?
           if( ! self.send("#{field}_cache_id").blank? && original.blank? )
-            puts "RESTORING FROM CACHE"
-            puts "id: #{self.send("#{field}_cache_id")}"
             cached_file = CachedFile.find(self.send("#{field}_cache_id"))
-            puts "cached file: #{cached_file.inspect}"
 
             tf = Tempfile.new("temp_file")
             tf.binmode
@@ -28,7 +25,6 @@ module FileUploadCache
 
             # TODO: close & cleanup
             self.send("#{field}=", tf)
-            puts "FETCHED FILE NOW: #{self.send(field).inspect}"
             self.send("cached_#{field}=", cached_file)
           end
         }
@@ -36,15 +32,6 @@ module FileUploadCache
     end
   end
 
-
-=begin
-  def restore_images
-    [:product_image, :logo_image].each do |field|
-    end
-  end
-
-=end
-  
 end
 
 ActiveRecord::Base.send(:include, FileUploadCache::CachedAttributes)

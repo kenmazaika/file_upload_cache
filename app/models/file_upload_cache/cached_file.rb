@@ -16,7 +16,6 @@ module FileUploadCache
                              :content_type => (image.content_type rescue 'omgomg'))
 
       FileUploadCache.file_cache.write("FileUploadCache::#{id}", cached_file) 
-      puts "JUST STORED: #{id}"
 
       cached_file
     end
