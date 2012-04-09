@@ -3,9 +3,9 @@ module FileUploadCache
     before_filter :require_current_cached_file, :only => :show
 
     def show
-      send_data current_cached_file.read, 
-        :type => current_cached_file.content_type,  
-        :disposition => 'inline'
+      options = {:disposition => 'inline'}
+      options.merge!({:type => current_cached_file.content_type}) if current_cached_file.content_type
+      send_data current_cached_file.read, options
     end
 
     private

@@ -10,10 +10,10 @@ module FileUploadCache
 
     def self.store(image)
       id = UUID.generate(:compact)
-      cached_file = self.new(:read => image.read, 
-                             :original_filename => (image.original_filename rescue 'omgomg'), 
-                             :id => id, 
-                             :content_type => (image.content_type rescue 'omgomg'))
+      cached_file = self.new(:read              => image.read, 
+                             :original_filename => image.respond_to?(:original_filename) ? image.original_filename : nil, 
+                             :id                => id, 
+                             :content_type      => image.respond_to?(:content_type) ? image.content_type : nil)
 
       FileUploadCache.file_cache.write("FileUploadCache::#{id}", cached_file) 
 
