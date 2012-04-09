@@ -47,10 +47,10 @@ end
 
 class TestCacheStore
   def initialize
+    @cache = Hash.new
   end
 
   def write(key, value)
-    @cache ||= Hash.new
     @cache[key] = value
   end
 
