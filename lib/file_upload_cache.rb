@@ -1,9 +1,6 @@
 
 require 'file_upload_cache/engine.rb'
 require 'active_support/core_ext/module/attribute_accessors.rb'
-require 'app/models/cached_file.rb'
-require 'app/controllers/cached_files_controller.rb'
-require 'app/inputs/uploader_input.rb'
 require 'file_upload_cache/cached_attributes.rb'
 require 'uuid'
 
