@@ -1,13 +1,8 @@
-# Snagged from: https://gist.github.com/2026284, then changed quite a bit
-
 # A formtastic input which incorporates a cache_id that can be fetched from server
 #
 # Example: `form.input :file, as: "uploader"`
-# 
-# Copyright (c) Samuel Cochran 2012, under the [MIT license](http://www.opensource.org/licenses/mit-license).
 if defined?(Formtastic)
   class UploaderInput < Formtastic::Inputs::FileInput
-
     def method_present?
       object.send(method).present?
     end
