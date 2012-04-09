@@ -7,7 +7,6 @@
 # Copyright (c) Samuel Cochran 2012, under the [MIT license](http://www.opensource.org/licenses/mit-license).
 if defined?(Formtastic)
   class UploaderInput < Formtastic::Inputs::FileInput
-    include Rails.application.routes.url_helpers
 
     def method_present?
       object.send(method).present?
@@ -24,14 +23,14 @@ if defined?(Formtastic)
     end
 
     def file_html
-      builder.file_field(method, input_html_options.merge(:class => 'cached_file'))
+      builder.file_field(method, input_html_options.merge(:class => 'cached_file', :id => method))
     end
 
     def existing_html
       if method_present?
         existing = template.content_tag(:span, object.send("cached_#{method}").try(:original_filename))
         template.content_tag(:div, :id => "#{method}_existing") do
-          template.link_to(existing, cached_file_path(object.send("cached_#{method}").try(:id))) <<
+          template.link_to(existing, Rails.application.routes.url_helpers.cached_file_path(object.send("cached_#{method}").try(:id))) <<
           template.content_tag(:span, " replace", :id => "#{method}_replace")
         end
       end or "".html_safe

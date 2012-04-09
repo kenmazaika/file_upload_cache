@@ -11,11 +11,12 @@ module FileUploadCache
     def self.store(image)
       id = UUID.generate(:compact)
       cached_file = self.new(:read => image.read, 
-                             :original_filename => image.original_filename, 
+                             :original_filename => (image.original_filename rescue 'omgomg'), 
                              :id => id, 
-                             :content_type => image.content_type)
+                             :content_type => (image.content_type rescue 'omgomg'))
 
       FileUploadCache.file_cache.write("FileUploadCache::#{id}", cached_file) 
+      puts "JUST STORED: #{id}"
 
       cached_file
     end
