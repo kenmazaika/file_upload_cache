@@ -33,4 +33,53 @@ File-Upload-Cache works like CarrierWave's Cache
     * Cached assets are served through the rails environment as dynamic content, instead of static content that can be served directly by Rack or a server like Apache or Nginx.
   * Built in integration with the full stack.  Formtastic integration & Javascript for dealing with the cached value 
 
+Instructions
+------------
 
+Add to Gemfile
+
+```
+gem 'file_upload_cache'
+```
+
+Add integration to the model.  For example, a field called avatar the following could be used to add caching on an existing image field.
+
+```
+  cached_file_for :avatar
+  attr_accessible :avatar, :avatar_cache_id
+```
+
+Change formtastic input to use the uploader input, provided by this engine
+
+```
+f.input :avatar, :as => :uploader
+```
+
+Add the following javascript to the pages that have the input in it:
+
+```
+  window.file_upload_cache = window.file_upload_cache || {};
+  window.file_upload_cache.initialize = function() {
+
+    $.each($('.cached_file'), function(index, element) {
+      var id = '#' + element.id,
+      $id = $(id),
+      $cache = $(id + "_cache"),
+      $replace = $(id + '_replace'),
+      $existing = $(id + "_existing");
+
+      if($cache.val()){
+        $(id).hide();
+      }
+      $($replace).click(function() {
+        $($id).show();
+        $($existing).hide();
+        $($cache).val(null);
+      });
+    });
+  }
+
+  $(function() {
+    window.file_upload_cache.initialize();
+  });
+```
