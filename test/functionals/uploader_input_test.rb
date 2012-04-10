@@ -8,51 +8,13 @@ class UploaderInputTest < ActionController::TestCase
   include ActionView::Context
   include ActionController::RecordIdentifier
 
-  def mock_omg_path(omg)
-    "/omgs/#{omg.object_id}"
-  end
   def protect_against_forgery?
     false
   end
 
-  # Build a mock object to do testing on.
-  class MockOmg
-    include FileUploadCache::CachedAttributes
-    include ActiveModel::Validations
-    extend ActiveModel::Callbacks
-    define_model_callbacks :validation   
-    
-
-    attr_accessor :omg_file
-    cached_file_for :omg_file
-
-    class StringWithAddons < String
-
-      def singular
-        "mock_omg"
-      end
-
-      def plural
-        "mock_omgs"
-      end
-
-      def i18n_key
-        "mock_omg"
-      end
-    end
-
-    def self.model_name
-      StringWithAddons.new("mock_omg")
-    end
-
-    def to_key
-      ["omg"]
-    end
-  end
-
   def test_form_without_cache_id
     momg = MockOmg.new
-    form = semantic_form_for(momg) do |f|
+    form = semantic_form_for(momg, :url => '/omg') do |f|
       f.input :omg_file, :as => :uploader
     end
 
@@ -71,7 +33,7 @@ class UploaderInputTest < ActionController::TestCase
 
     momg.cached_omg_file = cached_file
 
-    form = semantic_form_for(momg) do |f|
+    form = semantic_form_for(momg, :url => '/omg') do |f|
       f.input :omg_file, :as => :uploader
     end
 
@@ -83,7 +45,7 @@ class UploaderInputTest < ActionController::TestCase
 
   def test_form_allows_passing_custom_id
     momg = MockOmg.new
-    form = semantic_form_for(momg) do |f|
+    form = semantic_form_for(momg, :url => '/omg') do |f|
       f.input :omg_file, :as => :uploader, :input_html => {:id => 'the_omg'}
     end
 

@@ -20,12 +20,18 @@ module FileUploadCache
             cached_file = CachedFile.find(self.send("#{field}_cache_id"))
 
             tf = Tempfile.new("temp_file")
-            tf.binmode
-            tf.write(cached_file.read)
 
-            # TODO: close & cleanup
-            self.send("#{field}=", tf)
-            self.send("cached_#{field}=", cached_file)
+            begin
+              tf.binmode
+              tf.write(cached_file.read)
+
+              tf.rewind
+              self.send("#{field}=", tf)
+              self.send("cached_#{field}=", cached_file)
+            ensure
+              tf.close
+            end
+
           end
         }
       end

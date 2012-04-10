@@ -1,6 +1,6 @@
 require 'test_helper'
 module FileUploadCache
-  class TestFileUploadCache < MiniTest::Unit::TestCase
+  class CachedFileTest < MiniTest::Unit::TestCase
     def test_initializer
       file = FileUploadCache::CachedFile.new(:read => 'OMG', 
                             :id => 'id', 
