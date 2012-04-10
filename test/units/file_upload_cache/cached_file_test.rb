@@ -26,7 +26,7 @@ module FileUploadCache
 
       cached_file = FileUploadCache::CachedFile.find(cached_file.id)
 
-      assert ! cached_file.nil?, 'Could not fetch cached file; is memcache running?'
+      assert ! cached_file.nil?
 
       assert_equal file.original_filename, cached_file.original_filename
       assert_equal file.content_type, cached_file.content_type
