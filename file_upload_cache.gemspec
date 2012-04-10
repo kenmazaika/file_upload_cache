@@ -7,5 +7,7 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,lib,config}/**/*"] + ["Rakefile", "Gemfile"]
   s.version = "1.0.0"
   s.authors = ['Ken Mazaika']
-  s.add_dependency 'uuid', 'rails'
+  s.add_dependency 'uuid'
+  s.add_dependency 'rails'
+
 end
