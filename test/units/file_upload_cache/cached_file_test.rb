@@ -1,4 +1,4 @@
-require 'helper'
+require 'test_helper'
 module FileUploadCache
   class TestFileUploadCache < MiniTest::Unit::TestCase
     def test_initializer

@@ -1,4 +1,4 @@
-require 'helper'
+require 'test_helper'
 
 class FileUploadCache::CachedFilesControllerTest < ActionController::TestCase
   test "show not found" do

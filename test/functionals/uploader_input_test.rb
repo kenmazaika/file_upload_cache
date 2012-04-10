@@ -1,6 +1,4 @@
-require 'helper'
-require 'active_record'
-require 'file_upload_cache/cached_attributes.rb'
+require 'test_helper'
 require 'file_upload_cache/engine.rb'
 
 class UploaderInputTest < ActionController::TestCase
