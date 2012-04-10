@@ -2,6 +2,7 @@ Dir.chdir File.expand_path('../..', __FILE__)
 ENV['RAILS_ENV'] = 'test'
 require 'rubygems'
 require 'bundler'
+require 'active_record'
 begin
   Bundler.setup(:default, :development)
 rescue Bundler::BundlerError => e

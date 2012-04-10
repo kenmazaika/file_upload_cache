@@ -58,7 +58,7 @@ class UploaderInputTest < ActionController::TestCase
       f.input :omg_file, :as => :uploader
     end
 
-    expected = '<li class="uploader input optional" id="mock_omg_omg_file_input"><label class=" label" for="mock_omg_omg_file">Omg file</label><input id="omg_file_cache" name="mock_omg[omg_file_cache_id]" type="hidden" /><input class="cached_file" id="omg_file" name="mock_omg[omg_file]" type="file" />'
+    expected = '<li class="uploader input optional" id="mock_omg_omg_file_input"><label class=" label" for="mock_omg_omg_file">Omg file</label><input id="mock_omg_omg_file_cache" name="mock_omg[omg_file_cache_id]" type="hidden" /><input class="cached_file" id="mock_omg_omg_file" name="mock_omg[omg_file]" type="file" />'
 
     assert form.include?(expected)
   end
@@ -77,7 +77,19 @@ class UploaderInputTest < ActionController::TestCase
       f.input :omg_file, :as => :uploader
     end
 
-    expected = "<li class=\"uploader input optional\" id=\"mock_omg_omg_file_input\"><label class=\" label\" for=\"mock_omg_omg_file\">Omg file</label><input id=\"omg_file_cache\" name=\"mock_omg[omg_file_cache_id]\" type=\"hidden\" value=\"#{item_id}\" /><input class=\"cached_file\" id=\"omg_file\" name=\"mock_omg[omg_file]\" type=\"file\" />"
+    expected = "<li class=\"uploader input optional\" id=\"mock_omg_omg_file_input\"><label class=\" label\" for=\"mock_omg_omg_file\">Omg file</label><input id=\"mock_omg_omg_file_cache\" name=\"mock_omg[omg_file_cache_id]\" type=\"hidden\" value=\"#{item_id}\" /><input class=\"cached_file\" id=\"mock_omg_omg_file\" name=\"mock_omg[omg_file]\" type=\"file\" />"
+
+    assert form.include?(expected)
+  end
+
+
+  def test_form_allows_passing_custom_id
+    momg = MockOmg.new
+    form = semantic_form_for(momg) do |f|
+      f.input :omg_file, :as => :uploader, :input_html => {:id => 'the_omg'}
+    end
+
+    expected = '<li class="uploader input optional" id="mock_omg_omg_file_input"><label class=" label" for="the_omg">Omg file</label><input id="the_omg_cache" name="mock_omg[omg_file_cache_id]" type="hidden" /><input class="cached_file" id="the_omg" name="mock_omg[omg_file]" type="file" />'
 
     assert form.include?(expected)
   end
