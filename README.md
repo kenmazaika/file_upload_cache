@@ -83,3 +83,11 @@ Add the following javascript to the pages that have the input in it:
     window.file_upload_cache.initialize();
   });
 ```
+
+
+Demo Application
+----------------
+
+An example of using file_upload_cache with carrierwave can be found here: https://github.com/kenmazaika/pictures
+
+

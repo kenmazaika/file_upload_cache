@@ -81,5 +81,5 @@ PLATFORMS
 
 DEPENDENCIES
   formtastic
-  rails (= 3.0.12)
+  rails (>= 3.0.12)
   uuid
