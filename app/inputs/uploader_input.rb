@@ -24,7 +24,7 @@ if defined?(Formtastic)
     def existing_html
       if method_present?
         existing = template.content_tag(:span, object.send("cached_#{method}").try(:original_filename))
-        template.content_tag(:div, :id => "#{base_id}_existing") do
+        template.content_tag(:div, :id => "#{base_id}_existing", :class => 'cache_existing') do
           template.link_to(existing, Rails.application.routes.url_helpers.file_upload_cache_cached_file_path(object.send("cached_#{method}").try(:id))) <<
           template.content_tag(:span, " replace", :id => "#{base_id}_replace")
         end

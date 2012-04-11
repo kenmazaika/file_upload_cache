@@ -32,6 +32,7 @@ File-Upload-Cache works like CarrierWave's Cache
     * Can be easily configured to use different stores instead of just the file system (redis, memcache, etc)
     * Cached assets are served through the rails environment as dynamic content, instead of static content that can be served directly by Rack or a server like Apache or Nginx.
   * Built in integration with the full stack.  Formtastic integration & Javascript for dealing with the cached value 
+  * Works with heroku without needing to change rack configuration file (config.ru)
 
 Instructions
 ------------
@@ -84,10 +85,14 @@ Add the following javascript to the pages that have the input in it:
   });
 ```
 
+Optionally add this to your stylesheet to have the fields displayed inline:
+
+```
+  .cache_existing { display:inline; margin-left:10px }
+```
 
 Demo Application
 ----------------
 
-An example of using file_upload_cache with carrierwave can be found here: https://github.com/kenmazaika/pictures
-
-
+An example of using file_upload_cache with carrierwave can be found here: https://github.com/kenmazaika/pictures.
+The demo of the gem can be viewed here: http://cold-sunset-3667.heroku.com/.
