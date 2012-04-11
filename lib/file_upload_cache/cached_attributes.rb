@@ -21,7 +21,7 @@ module FileUploadCache
           if( ! self.send("#{field}_cache_id").blank? && original.blank? )
             cached_file = CachedFile.find(self.send("#{field}_cache_id"))
 
-            FileUploadCache::Tempfile.for(cached_file.read) do |tf|
+            FileUploadCache::Tempfile.for(cached_file.read, cached_file.original_filename) do |tf|
               self.send("#{field}=", tf)
               self.send("cached_#{field}=", cached_file)
             end
