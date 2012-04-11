@@ -32,6 +32,7 @@ File-Upload-Cache works like CarrierWave's Cache
     * Can be easily configured to use different stores instead of just the file system (redis, memcache, etc)
     * Cached assets are served through the rails environment as dynamic content, instead of static content that can be served directly by Rack or a server like Apache or Nginx.
   * Built in integration with the full stack.  Formtastic integration & Javascript for dealing with the cached value 
+  * Don't need to deal with cleaning up the data (caches can be configured with ttl)
 
 Instructions
 ------------
