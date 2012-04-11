@@ -15,21 +15,15 @@ module FileUploadCache
 
         before_validation lambda { 
           original = self.instance_variable_get("@#{field}_original")
+          original.rewind if original && original.respond_to?(:rewind)
+
           self.send("cached_#{field}=", CachedFile.store(original)) unless original.blank?
           if( ! self.send("#{field}_cache_id").blank? && original.blank? )
             cached_file = CachedFile.find(self.send("#{field}_cache_id"))
 
-            tf = Tempfile.new("temp_file")
-
-            begin
-              tf.binmode
-              tf.write(cached_file.read)
-
-              tf.rewind
+            FileUploadCache::Tempfile.for(cached_file.read) do |tf|
               self.send("#{field}=", tf)
               self.send("cached_#{field}=", cached_file)
-            ensure
-              tf.close
             end
 
           end
