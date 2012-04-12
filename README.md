@@ -97,3 +97,8 @@ Demo Application
 
 An example of using file_upload_cache with carrierwave can be found here: https://github.com/kenmazaika/pictures.
 The demo of the gem can be viewed here: http://cold-sunset-3667.heroku.com/.
+
+Documentation
+------------
+
+[Without Carrierwave](https://github.com/kenmazaika/file_upload_cache/wiki/Without-Carrierwave)
