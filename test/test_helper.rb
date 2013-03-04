@@ -74,7 +74,9 @@ class MockOmg
   attr_reader   :omg_file, :omg_file_data
 
   def omg_file=(file)
-    @omg_file_data = file.read.dup
+    if file.respond_to?(:read)
+      @omg_file_data = file.read.dup
+    end
   end
 
   cached_file_for :omg_file

@@ -54,6 +54,27 @@ module FileUploadCache
       assert_equal cached_file, fetched_cached_file
     end
 
+    def test_validation_doesnt_store_item_in_cache
+      omg = MockOmg.new
+      omg.omg_file = nil
+
+      cached_file = omg.cached_omg_file
+      assert_equal nil, cached_file
+
+      omg.valid?
+
+      assert_nil omg.cached_omg_file
+
+      omg.omg_file = 'String'
+
+      cached_file = omg.cached_omg_file
+      assert_equal nil, cached_file
+
+      omg.valid?
+
+      assert_nil omg.cached_omg_file
+    end
+
     def test_validation_restores_item_from_cache_id
       file = TestMultipartFile.new(File.open(File.expand_path('test/fixtures/sadface.jpg'))) 
       cached_file = FileUploadCache::CachedFile.store(file)      
