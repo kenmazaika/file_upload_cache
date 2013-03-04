@@ -17,7 +17,7 @@ module FileUploadCache
           original = self.instance_variable_get("@#{field}_original")
           original.rewind if original && original.respond_to?(:rewind)
 
-          self.send("cached_#{field}=", CachedFile.store(original)) unless !original.respond_to?(:read)
+          self.send("cached_#{field}=", CachedFile.store(original)) if original.respond_to?(:read)
           if( ! self.send("#{field}_cache_id").blank? && original.blank? )
             cached_file = CachedFile.find(self.send("#{field}_cache_id"))
 
