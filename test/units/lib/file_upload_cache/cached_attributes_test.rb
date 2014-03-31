@@ -97,5 +97,11 @@ module FileUploadCache
         tf.close
       end
     end
+
+    def test_bad_cache_doesnt_break_validation
+      omg = MockOmg.new
+      omg.omg_file_cache_id = 42
+      assert omg.valid?
+    end
   end
 end
