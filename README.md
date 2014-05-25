@@ -102,3 +102,11 @@ Documentation
 ------------
 
 [Without Carrierwave](https://github.com/kenmazaika/file_upload_cache/wiki/Without-Carrierwave)
+
+
+
+License
+--------
+
+Released under the MIT License.
+
