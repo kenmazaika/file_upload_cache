@@ -2,7 +2,7 @@ require 'test_helper'
 
 class FileUploadCache::CachedFilesControllerTest < ActionController::TestCase
   test "show not found" do
-    nonexistant_id = UUID.generate(:compact)
+    nonexistant_id = "invalid-id"
     get :show, :id => nonexistant_id
     assert_response :not_found
   end

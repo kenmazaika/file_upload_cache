@@ -1,8 +1,8 @@
 Dir.chdir File.expand_path('../..', __FILE__)
 ENV['RAILS_ENV'] = 'test'
-require 'rubygems'
 require 'bundler'
 require 'active_record'
+
 begin
   Bundler.setup(:default, :development)
 rescue Bundler::BundlerError => e
@@ -10,18 +10,9 @@ rescue Bundler::BundlerError => e
   $stderr.puts "Run `bundle install` to install missing gems"
   exit e.status_code
 end
+
 require 'tester/config/environment'
 require 'rails/test_help'
-
-
-
-begin
-  Bundler.setup(:default, :development)
-rescue Bundler::BundlerError => e
-  $stderr.puts e.message
-  $stderr.puts "Run `bundle install` to install missing gems"
-  exit e.status_code
-end
 require 'minitest/unit'
 
 $LOAD_PATH.unshift(File.dirname(__FILE__))
@@ -69,7 +60,7 @@ class MockOmg
   include ActiveModel::Validations
   extend  ActiveModel::Callbacks
 
-  define_model_callbacks :validation 
+  define_model_callbacks :validation
 
   attr_reader   :omg_file, :omg_file_data
 

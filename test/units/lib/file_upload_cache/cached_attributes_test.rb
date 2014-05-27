@@ -9,7 +9,7 @@ module FileUploadCache
       assert_equal nil, omg.omg_file_cache_id
       assert_equal nil, omg.cached_omg_file
 
-      uuid = UUID.generate(:compact)
+      uuid = SecureRandom.hex
       omg.omg_file_cache_id = uuid
       assert_equal uuid, omg.omg_file_cache_id
 
@@ -25,7 +25,7 @@ module FileUploadCache
     def test_alias_method_chain_will_cache_value_set_for_field
       omg = MockOmg.new
 
-      file = TestMultipartFile.new(File.open(File.expand_path('test/fixtures/sadface.jpg'))) 
+      file = TestMultipartFile.new(File.open(File.expand_path('test/fixtures/sadface.jpg')))
       omg.omg_file = file
       assert_equal file.read, omg.omg_file_data
       assert_equal file, omg.instance_eval { @omg_file_original }
@@ -38,7 +38,7 @@ module FileUploadCache
 
     def test_validation_stores_item_in_cache
       omg = MockOmg.new
-      file = TestMultipartFile.new(File.open(File.expand_path('test/fixtures/sadface.jpg'))) 
+      file = TestMultipartFile.new(File.open(File.expand_path('test/fixtures/sadface.jpg')))
       omg.omg_file = file
 
       cached_file = omg.cached_omg_file
@@ -48,7 +48,7 @@ module FileUploadCache
 
       cached_file = omg.cached_omg_file
       assert cached_file.is_a?(FileUploadCache::CachedFile)
-      
+
       assert ! cached_file.id.blank?
       fetched_cached_file = FileUploadCache::CachedFile.find(cached_file.id)
       assert_equal cached_file, fetched_cached_file
@@ -76,8 +76,8 @@ module FileUploadCache
     end
 
     def test_validation_restores_item_from_cache_id
-      file = TestMultipartFile.new(File.open(File.expand_path('test/fixtures/sadface.jpg'))) 
-      cached_file = FileUploadCache::CachedFile.store(file)      
+      file = TestMultipartFile.new(File.open(File.expand_path('test/fixtures/sadface.jpg')))
+      cached_file = FileUploadCache::CachedFile.store(file)
       assert ! cached_file.id.nil?
 
       omg = MockOmg.new
